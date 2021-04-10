@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "SearchResults";
+}
+
+
+    <section class="page-section">
+        <div class="transparent">
+            <h2>Search Results</h2>
+
+
+            <h4>Available rooms for @ViewBag.adults adult(s) and @ViewBag.children child(ren)</h4>
+
+
+            <div class="container">
+                <div class="row rooms">
+
+                    @if (ViewBag.doubles != null)
+                    {
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <img src="~/images/double.jpg" alt="double room" />   <br />
+
+                            <label>Double room</label>
+
+                            <label>£ @ViewBag.doubles.price</label>
+                            <br /> @Html.ActionLink("Book this room", "Book", new { roomId = ViewBag.doubles.roomNumber, adults = ViewBag.adults, children = ViewBag.children, indate = ViewBag.indate, outdate = ViewBag.outdate }, new { @class = "btn btn-default" })
+
+
+                        </div>
+
+
+
+                    }
+
+
+
+
+                    @if (ViewBag.twins != null)
+                    {
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <img src="~/images/twin.jpg" alt="twin room" /><br /> <label>Twin room</label>
+                            <label>£ @ViewBag.twins.price</label>
+                            <br /> @Html.ActionLink("Book this room", "Book", new { roomId = ViewBag.twins.roomNumber, adults = ViewBag.adults, children = ViewBag.children, indate = ViewBag.indate, outdate = ViewBag.outdate }, new { @class = "btn btn-default" })
+
+                        </div>
+
+                    }
+                    @if (ViewBag.triples != null)
+                    {
+
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+
+                            <img src="~/images/triple.jpg" alt="triple room" /> <br /><label>Triple room</label>
+                            <label>£ @ViewBag.triples.price</label>
+                            <br />@Html.ActionLink("Book this room", "Book", new { roomId = ViewBag.triples.roomNumber, adults = ViewBag.adults, children = ViewBag.children, indate = ViewBag.indate, outdate = ViewBag.outdate }, new { @class = "btn btn-default" })
+
+                        </div>
+                    }
+                    @if (ViewBag.familys != null)
+                    {
+
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <img src="~/images/family.jpg" alt="family room" /> <br />   <label>Family room</label>
+                            <label>£ @ViewBag.familys.price</label><br />
+                            @Html.ActionLink("Book this room", "Book", new { roomId = ViewBag.familys.roomNumber, adults = ViewBag.adults, children = ViewBag.children, indate = ViewBag.indate, outdate = ViewBag.outdate }, new { @class = "btn btn-default" })
+
+                        </div>
+                    }
+
+
+                </div>
+
+            </div>
+
+
+
+            <label>@ViewBag.message</label>
+        </div>
+        </section>

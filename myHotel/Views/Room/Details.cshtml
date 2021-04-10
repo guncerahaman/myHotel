@@ -1,0 +1,55 @@
+﻿@model myHotel.Models.Room
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Room</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+        <dt>
+            Room Type:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.roomType)
+        </dd>
+
+        <dt>
+            Base Price:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+        </dl>
+            @ViewBag.roomstat
+            @if (@ViewBag.roomstat != "No Current Reservations")
+            {
+                <table class="table">
+                    @foreach (var item in ViewBag.roomres)
+                    {
+                        <tr>
+                            <td>@item.checkin.ToShortDateString()</td>
+                            <td>@item.checkout.ToShortDateString()</td>
+                            <td>
+                                @item.Customer.customerName @Html.ActionLink("Go to customer", "Details", "Customer", new { id = item.customerID },null)
+                            </td>
+
+                        </tr>
+
+                    }
+                </table>
+            }
+
+ 
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.roomNumber }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

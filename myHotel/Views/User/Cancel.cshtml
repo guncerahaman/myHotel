@@ -1,0 +1,22 @@
+﻿@model myHotel.Models.Reservation
+
+@{
+    ViewBag.Title = "Cancel";
+}
+    <section class="page-section">
+        <h2>Request to cancel your reservation</h2>
+        <p> Please note all cancellation request needs to be confirmed by Hotel staff.</p>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <textarea class="form-text" name="reason" cols="70" rows="10"  placeholder="Please write the reason for cancellation here..." ></textarea>
+           
+            <div class="form-actions no-color">
+   <input name="reservationID" value="@ViewBag.resID" style="display:none" />
+ <input type="submit" value="Cancel Reservation" class="btn btn-default" /> 
+
+            </div>
+        }
+
+
+    </section>

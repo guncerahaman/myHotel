@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Gallery";
+}
+    <section class="page-section">
+
+
+        <h2 class="text-center">Gallery</h2>
+        <div class="container" >
+            <div class="gallery" id="galflex">
+                @if (ViewBag.imagelist != null)
+                {
+
+                    foreach (var image in (IEnumerable<string>)ViewBag.imagelist)
+                    {
+                        string imgtitle = "";
+
+                        if (image.Contains("family"))
+                        {
+                            imgtitle = "Family Suites";
+                        }
+                        if (image.Contains("generic"))
+                        {
+                            imgtitle = "Other Photos";
+                        }
+                        if (image.Contains("double_"))
+                        {
+                            imgtitle = "Double Rooms";
+                        }
+                        if (image.Contains("twin"))
+                        {
+                            imgtitle = "Twin Suites";
+                        }
+                        if (image.Contains("triple"))
+                        {
+                            imgtitle = "Triple Rooms";
+                        }
+
+                        <a href="@Url.Content(image)" class="big"><img src="@Url.Content(image)" alt="" title="@imgtitle" /></a>
+                        
+                    }
+                }
+                
+                <div class="clear"></div>
+            </div>
+            </div>
+
+    </section>

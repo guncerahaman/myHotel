@@ -1,0 +1,50 @@
+﻿@model IEnumerable<myHotel.Models.messages>
+
+@{
+    ViewBag.Title = "Messages";
+}
+
+<h2>Messages</h2>
+
+
+<table class="table table-bordered" id="dataTable">
+    <thead>
+        <tr>
+            <th>
+                Name:
+            </th>
+            <th>
+                Email:
+            </th>
+
+            @*<th>
+                Date:
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.date)
+                </td>*@
+                <td>
+
+
+                    @Html.ActionLink("Read", "ReadMessage", new { id = item.Id }) |
+                    <input class="delete fas fa-lg fa-trash-alt" type="button" value="Delete" />
+                    @Html.ActionLink("Delete", "DeleteMessage", new { id = item.Id }, new { @class = "deleteconfirm" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

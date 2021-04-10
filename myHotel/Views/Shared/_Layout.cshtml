@@ -1,0 +1,178 @@
+﻿@{
+     ViewBag.Title = "myHotel Website and Hotel Management System";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="myHotel Website and Hotel Management System">
+    <meta name="author" content="Gunce Rahaman">
+    <link rel="icon" href="favicon.ico">
+    <title>@ViewBag.Title</title>
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Custom styles for this template -->
+    <link href="~/Content/owl.carousel.css" rel="stylesheet">
+    <link href="~/Content/owl.theme.default.min.css" rel="stylesheet">
+    <link href="~/Content/animate.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="~/Content/style.css" rel="stylesheet">
+    <link href="~/Content/simple-lightbox.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/cc5c8ebfcc.js"></script>
+    <style>
+    
+     
+         .container .gallery a img {
+          
+        
+           width:100%;
+            border: 5px solid white ;
+            -webkit-transition: -webkit-transform .15s ease;
+            -moz-transition: -moz-transform .15s ease;
+            -o-transition: -o-transform .15s ease;
+            -ms-transition: -ms-transform .15s ease;
+            transition: transform .15s ease;
+            position: relative;
+        }
+          
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="~/Home/"><img src="~/images/logo.png" height="60"></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="~/Home/">Home</a>
+                    </li>
+                    <li>
+                        @Html.ActionLink("About", "About", "Home", null, new { @class = "page-scroll" })
+
+
+                    </li>
+                    <li>
+                        @Html.ActionLink("Features", "Features", "Home", null, new { @class = "page-scroll" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("Gallery", "Gallery", "Home", null, new { @class = "page-scroll" })
+
+                    </li>
+
+                    <li>
+                        @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "page-scroll" })
+
+                    </li>
+                    <li>
+                        @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "page-scroll" })
+
+                    </li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li>
+                            @Html.ActionLink("My Bookings", "Index", "User", null, new { @class = "page-scroll" })
+                        </li>
+
+                        <li>
+                            @Html.ActionLink("My Account", "Index", "User", null, new { @class = "page-scroll" })
+
+                        </li>
+
+                        <li style="margin-left:1rem;">
+                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <a class="page-scroll" href="javascript:document.getElementById('logoutForm').submit()"><img src="~/images/out.png" width="25" /></a>
+
+                            }
+
+                        </li>
+                    }
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <div class="myflex">
+        <div id="content">
+            @RenderBody()
+        </div>
+        <footer>
+            <p>&copy; @DateTime.Now.Year - MyHotel by <a href="http://guncerahaman.co.uk">Gunce Rahaman</a></p>
+        </footer>
+
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/owl.carousel.min.js"></script>
+    <script src="~/Scripts/cbpAnimatedHeader.js"></script>
+    <script src="~/Scripts/jquery.appear.js"></script>
+    <script src="~/Scripts/SmoothScroll.min.js"></script>
+    <script src="~/Scripts/theme-scripts.js"></script>
+
+    <script>
+        var owl = $('.owl-carousel');
+        owl.owlCarousel({
+            items: 3,
+            loop: true,
+            margin: 0,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            autoplayHoverPause: false,
+
+            pagination: false,
+            dots: false,
+            responsiveClass: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: false
+                },
+                600: {
+                    items: 1,
+                    nav: false
+                },
+                1000: {
+                    items: 1,
+                    nav: false
+                }
+            }
+        });
+
+
+    </script>
+    <script src="~/Scripts/simple-lightbox.js"></script>
+    <script>
+        (function () {
+            var $gallery = new SimpleLightbox('.gallery a', {});
+        })();</script>
+</body>
+</html>

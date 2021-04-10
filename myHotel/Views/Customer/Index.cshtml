@@ -1,0 +1,66 @@
+﻿@model IEnumerable<myHotel.Models.Customer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Customers</h2>
+
+<p>
+    @Html.ActionLink("Add New Customer", "Create",null,new { @class = "btn btn-default" })
+</p>
+<table class="table table-bordered" id="dataTable" cellspacing="0">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+
+            <th>
+                City
+            </th>
+            <th>
+                Postcode
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telephone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>Bookings</th>
+
+            <th></th>
+        </tr>
+    </thead><tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.customerName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Postcode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telephone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @item.Reservation.Count()<br />
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.customerID }, new { @class = "btn btn-default" })
+                @Html.ActionLink("New Booking", "ReservationForExisting","Admin",new { id = item.customerID }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Details", "Details", new { id = item.customerID }, new { @class = "btn btn-default" })
+                           </td>
+        </tr>
+    }
+</tbody>
+</table>

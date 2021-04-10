@@ -1,0 +1,58 @@
+﻿@model IEnumerable<myHotel.Models.Reservation>
+
+@{
+    ViewBag.Title = "Incomplete";
+}
+
+<h2>Incomplete Reservations</h2>
+<p>
+    @Html.ActionLink("New Reservation", "NewReservation", "Admin", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Current Reservations", "Index", "Reservations", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Past Reservations", "PastReservations", "Reservations", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Cancellations", "Cancellations", "Admin", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Cancellation Requests", "CancelRequests", "Admin", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Incomplete Reservations", "Incomplete", "Reservations", null, new { @class = "btn btn-default" })
+
+</p>
+
+<p>Please contact customer where possible, Delete reservation if not valid.</p>
+
+<table class="table">
+    <tr>
+       
+       
+        <th>
+            Reservation Date
+        </th>
+        
+        <th>
+            Customer Name
+        </th>
+        <th>
+          Room Type
+        </th>
+        <th>Actions</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.resDate)
+        </td>
+       
+        <td>
+            @Html.ActionLink(item.Customer.customerName, "Details", "Customer", new { id = item.customerID })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Room.roomType)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ReservationID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ReservationID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ReservationID })
+        </td>
+    </tr>
+}
+
+</table>

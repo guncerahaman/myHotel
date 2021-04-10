@@ -1,0 +1,47 @@
+﻿@model IEnumerable<myHotel.Models.Cancellation>
+
+@{
+    ViewBag.Title = "Cancellations";
+}
+
+<h2>Cancellations</h2>
+<p>
+    @Html.ActionLink("New Reservation", "NewReservation", "Admin", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Current Reservations", "Index", "Reservations", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Past Reservations", "PastReservations", "Reservations", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Cancellations", "Cancellations", "Admin", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Cancellation Requests", "CancelRequests", "Admin", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Incomplete Reservations", "Incomplete", "Reservations", null, new { @class = "btn btn-default" })
+
+</p>
+<table class="table">
+    <tr>
+
+        <th>
+            Reason
+        </th>
+        <th>
+            Status
+        </th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.reason)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reservation.status)
+            </td>
+            <td>
+                @Html.ActionLink("Mark as Refunded", "Refunded", new { id = item.cID }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Reservation Details", "Details", "Reservations", new { id = item.reservationID }, new { @class = "btn btn-default" })
+
+            </td>
+        </tr>
+    }
+
+</table>

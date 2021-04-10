@@ -1,0 +1,92 @@
+﻿@model myHotel.Models.Customer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.customerName)
+        </dd>
+
+        <dt>
+            Address
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressLine1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Postcode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Postcode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telephone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telephone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+    </dl>
+    <h4>Reservations for this customer</h4>
+    @Html.ActionLink("Add New Reservation", "ReservationForExisting", "Admin", new { id = Model.customerID }, new { @class = "btn btn-default" })
+
+    @if (@ViewBag.reservations != null)
+    {
+        <table class="table">
+            @foreach (var item in ViewBag.reservations)
+            {
+                <tr>
+                    <td>@item.checkin.ToShortDateString()</td>
+                    <td>@item.checkout.ToShortDateString()</td>
+                    <td>
+                        @item.Room.roomType   @item.roomNumber
+                    </td>
+                    <td>@item.status</td>
+                    <td>@Html.ActionLink("Go to Reservation", "Details", "Reservations", new { id = item.ReservationID }, new { @class = "btn btn-default" })</td>
+
+
+                </tr>
+
+            }
+        </table>
+    }
+</div>
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.customerID }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Delete", "Delete", new { id = Model.customerID }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Back to Customer List", "Index",null, new { @class = "btn btn-default" })
+</p>

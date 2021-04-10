@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Features";
+}
+
+<h2>Manage Features Page</h2>
+
+@if (ViewBag.message != null)
+{
+    <p>@ViewBag.message</p>
+}
+<div>
+    @*<label class="form-label">Add a title</label>
+        <input class="form-control" type="text" name="title" />*@
+    @using (Html.BeginForm())
+    {@Html.AntiForgeryToken()
+    <label class="form-label">Add Text</label>
+    if (ViewBag.htmltext != null)
+    {
+<textarea name="htmltext" id="myEditor">@ViewBag.htmltext</textarea>
+    }
+    else
+    {
+<textarea name="htmltext" id="myEditor"></textarea>
+    }
+
+    <button id="savebtn" class="btn btn-primary" type="submit">Save</button>}
+</div>
+<div id="display"></div>

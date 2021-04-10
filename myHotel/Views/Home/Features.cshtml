@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Features";
+}
+
+
+
+<section class="page-section">
+
+    <h2 class="text-center">Features</h2>
+
+    <iframe id="myIframe" frameborder="0" width="100%" src="/features.html"></iframe>
+
+</section>
+<script>
+    var iframe = document.getElementById("myIframe");
+    iframe.onload = function () {
+        iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+        iframe.style.backgroundColor = "rgba(255,255,255,0.5)";
+    }</script>

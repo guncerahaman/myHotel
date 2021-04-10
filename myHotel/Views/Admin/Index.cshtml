@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewBag.Title = "Manage Website";
+}
+
+<h2>Dashboard Home</h2>
+<p>Please Note: Admin Panel is temporarily accessible without a password for demonstration purposes. </p>
+<div class="row">
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-primary text-white mb-4">
+            <div class="card-body ">Occupied Rooms : @ViewBag.OccupiedLength</div>
+
+            <div class="togglebtn card-footer d-flex align-items-center justify-content-between">
+            
+                <div class="small text-white">Details <i class="fas fa-angle-right"></i></div>
+            </div>
+            <div class="toggle"><table class="table">
+
+                @foreach (var item in ViewBag.Occupied)
+                {
+                                    <tr>
+                                        <td>@item.roomNumber</td>
+                                        <td>@item.roomType</td>
+                                        <td>@Html.ActionLink("Go to Room", "Details","Room", new { id = item.roomNumber },new { @class = "btn btn-default" })</td>
+                                    </tr>
+                }
+                 </table></div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-warning text-white mb-4">
+            <div class="card-body ">Recent Reservations </div>
+            <div class="togglebtn card-footer d-flex align-items-center justify-content-between">
+           
+                <div class="small text-white">Details <i class="fas fa-angle-right"></i></div>
+            </div>            
+            <div class="toggle"><table class="table">
+
+    @foreach (var item in ViewBag.rReservations)
+    {
+                                    <tr>
+                                        <td>@item.checkin.ToShortDateString()</td>
+                                        <td>@item.checkout.ToShortDateString()</td>
+                                        <td>@item.Customer.customerName</td>
+                                        <td>@item.status</td>
+                                        <td>@Html.ActionLink("Details", "Details", "Reservations", new { id = item.ReservationID }, new { @class = "btn btn-default" })</td>
+
+                                    </tr>
+    }
+</table> </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-success text-white mb-4">
+            <div class="card-body">Upcoming Reservations</div>
+            <div class="togglebtn card-footer d-flex align-items-center justify-content-between">
+                <div class="small text-white ">Details <i class="fas fa-angle-right"></i></div>
+            </div><div class="toggle">
+                <table class="table">
+
+                    @foreach (var item in ViewBag.Reservations)
+                    {
+                    <tr>
+                        <td>@item.checkin.ToShortDateString()</td>
+                        <td>@item.checkout.ToShortDateString()</td>
+                        <td>@item.Customer.customerName</td>
+                        <td>@item.status</td>
+                        <td>@Html.ActionLink("Details", "Details", "Reservations", new { id = item.ReservationID },new { @class = "btn btn-default" })</td> 
+                    </tr>
+                    }
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-danger text-white mb-4">
+            <div class="card-body">Cancellations Requests: @ViewBag.CancellationsLength </div>
+            <div class="togglebtn card-footer d-flex align-items-center justify-content-between">
+         
+                <div class="small text-white">Details <i class="fas fa-angle-right"></i></div>
+            </div>            <div class="toggle"><table class="table">
+
+    @foreach (var item in ViewBag.Cancellations)
+    {
+                                                      <tr>
+                                                          <td>@item.Reservation.Customer.customerName</td>
+                                                          @if (item.refunded)
+                                                          {
+                                                              <td>Refund Completed</td>
+                                                          }
+                                                          else
+                                                          {
+                                                              <td>Refund Pending</td>
+                                                          }
+
+                                                          <td>@item.Reservation.status</td>
+                                                          
+
+
+                                                      </tr>
+    }
+</table> 
+                                                  @Html.ActionLink("See all cancellations", "Cancellations",null,new { @class = "btn btn-default" })</div>
+        </div>
+    </div>
+</div>

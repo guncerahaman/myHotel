@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+    <div class="owl-carousel owl-theme" style="z-index:-1">
+        <div class="item"><img style="height:100vh;  object-fit: cover" src='~/images/1.jpg' /></div>
+        <div class="item"><img style="height:100vh;  object-fit: cover" src='~/images/2.jpg' /></div>
+        <div class="item"><img style="height:100vh;  object-fit: cover" src='~/images/3.jpg' /></div>
+    </div>
+
+    <div id="booking" class="section">
+        <div class="section-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7 col-md-push-5">
+                        <div id="msg" class="booking-cta">
+                            <h1>Make your reservation</h1>
+                            <p>Book early to save!</p>
+
+                        </div>
+                       
+                    </div>
+                    <div class="col-md-5 col-md-pull-7">
+                        <div class="booking-form">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <span class="form-label">Check In</span>
+                                            <input id="date1" style="min-width:130px" class="form-control" type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" placeholder="@DateTime.Now.ToString("yyyy-MM-dd")" value="@DateTime.Now.ToString("yyyy-MM-dd")" name="indate" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <span class="form-label">Check out</span>
+                                            <input id="date2" style="min-width:130px" class="form-control" type="date" placeholder="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" value="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" name="outdate" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <span class="form-label">Adults</span>
+
+                                        <select id="adults" class="form-control" name="adults">
+                                            <option value="1">1 Adult</option>
+                                            <option value="2">2 Adults</option>
+                                            <option value="3">3 Adults</option>
+                                        </select>
+
+                                        <span class="select-arrow"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <span class="form-label">Children</span>
+
+                                        <select id="children" class="form-control" name="children">
+                                            <option value="0">No children</option>
+                                            <option value="1">1 Child</option>
+                                            <option value="2">2 Children</option>
+                                            <option value="3">3 Children</option>
+                                        </select>
+                                        <span class="select-arrow"></span>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-btn">
+
+                                    <button type="submit" class="submit-btn">Check availability</button>
+                                </div>
+                              
+                            }
+
+
+                            <script>
+                                var adultlist = document.getElementById("adults");
+                                var childlist = document.getElementById("children");
+                                 var date1 = document.getElementById("date1");
+                                var date2 = document.getElementById("date2");
+                                
+                                date1.addEventListener("change", function () {
+                                    date2.setAttribute("min", date1.value);
+                                });
+                      
+                                adultlist.addEventListener("change", function () {
+                                    if (adultlist.value > 2) {
+
+                                        childlist.options[2].disabled = true;
+                                        childlist.options[3].disabled = true;
+                                    }
+                                    else {
+                                        childlist.options[2].disabled = false;
+                                        childlist.options[3].disabled = false;
+                                    }
+
+                                });
+                              
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+

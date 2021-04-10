@@ -1,0 +1,186 @@
+﻿@model IEnumerable<myHotel.Models.Reservation>
+@{
+    ViewBag.Title = "Index";
+}
+<section class="page-section">
+
+
+    <h2>Current Bookings</h2>
+    @if (Model.ToList().Count < 1)
+    {
+        <label>There are no current bookings.</label>
+    }
+    else
+    {
+        <table class="table table-bordered table-hover transparent">
+            <thead>
+
+                <tr style="background-color:#fec503">
+                    <th>Checkin Date</th>
+                    <th>Checkout Date</th>
+                    <th>Guests</th>
+                    <th>Room Type</th>
+                    <th>Details</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @**@
+                @foreach (var item in Model)
+                {
+                    string color = "";
+
+                    if (item.status == "Cancel Requested")
+                    {
+                        color = "orange";
+                    }
+                    else if (item.status == "Cancellation Accepted")
+                    {
+                        color = "blue";
+                    }
+                    else if (item.status == "Cancellation Rejected")
+                    {
+                        color = "gray";
+                    }
+                    else if (item.status == "Refunded")
+                    {
+                        color = "yellow";
+                    }
+                    else if (item.status == "Refunded" || item.status == "Cancelled")
+                    {
+                        color = "red";
+                    }
+
+                    <tr style="background-color:@color">
+                        <td>@item.checkin.ToShortDateString()</td>
+                        <td>@Convert.ToDateTime(item.checkout).ToShortDateString()</td>
+                        <td>@item.adult Adult(s) @item.children Child(ren)</td>
+                        <td>@item.Room.roomType</td>
+                        <td> @Html.ActionLink("Details", "Details", new { id = item.ReservationID }, new { @class = "btn btn-default" })</td>
+
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+    }
+
+    <h2>Past Bookings</h2>
+    @if (ViewBag.pastres == null)
+    {
+        <label>There are no past bookings.</label>
+    }
+    else
+    {
+        <table class="table table-bordered table-hover transparent">
+            <thead>
+
+                <tr style="background-color:#fec503">
+                    <th>Checkin Date</th>
+                    <th>Checkout Date</th>
+                    <th>Guests</th>
+                    <th>Room Type</th>
+                    <th>Details</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @**@
+                @foreach (var item in ViewBag.pastres)
+                {
+                    string color = "";
+
+                    if (item.status == "Cancel Requested")
+                    {
+                        color = "orange";
+                    }
+                    else if (item.status == "Cancellation Accepted")
+                    {
+                        color = "blue";
+                    }
+                    else if (item.status == "Cancellation Rejected")
+                    {
+                        color = "gray";
+                    }
+                    else if (item.status == "Refunded")
+                    {
+                        color = "yellow";
+                    }
+                    else if (item.status == "Refunded" || item.status == "Cancelled")
+                    {
+                        color = "red";
+                    }
+
+
+                    <tr style="background-color:@color">
+                        <td>@item.checkin.ToShortDateString()</td>
+                        <td>@Convert.ToDateTime(item.checkout).ToShortDateString()</td>
+                        <td>@item.adult Adult(s) @item.children Child(ren)</td>
+                        <td>@item.Room.roomType</td>
+                        <td> @Html.ActionLink("Details", "Details", new { id = item.ReservationID }, new { @class = "btn btn-default" })</td>
+
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>}
+    @if (ViewBag.incomplete != null)
+    {
+ <h2>Incomplete Bookings</h2>
+   
+        <table class="table table-bordered table-hover transparent">
+            <thead>
+
+                <tr style="background-color:#fec503">
+                    <th>Checkin Date</th>
+                    <th>Checkout Date</th>
+                    <th>Guests</th>
+                    <th>Room Type</th>
+                    <th>Details</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @**@
+                @foreach (var item in ViewBag.incomplete)
+                {
+                    string color = "";
+
+                    if (item.status == "Cancel Requested")
+                    {
+                        color = "orange";
+                    }
+                    else if (item.status == "Cancellation Accepted")
+                    {
+                        color = "blue";
+                    }
+                    else if (item.status == "Cancellation Rejected")
+                    {
+                        color = "gray";
+                    }
+                    else if (item.status == "Refunded")
+                    {
+                        color = "yellow";
+                    }
+                    else if (item.status == "Refunded" || item.status == "Cancelled")
+                    {
+                        color = "red";
+                    }
+
+
+                    <tr style="background-color:@color">
+                        <td>@item.checkin.ToShortDateString()</td>
+                        <td>@Convert.ToDateTime(item.checkout).ToShortDateString()</td>
+                        <td>@item.adult Adult(s) @item.children Child(ren)</td>
+                        <td>@item.Room.roomType</td>
+                        <td> @Html.ActionLink("Complete Booking", "Payment","Home", new {reservationID = item.ReservationID }, new { @class = "btn btn-default" })</td>
+
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>}
+</section>

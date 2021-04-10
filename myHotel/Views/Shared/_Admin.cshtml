@@ -1,0 +1,194 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    Layout = null;
+     ViewBag.Title = "Admin";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/ui/trumbowyg.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <script src="https://use.fontawesome.com/cc5c8ebfcc.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/plugins/colors/ui/trumbowyg.colors.min.css" rel="stylesheet" />
+
+
+
+
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+
+
+</head>
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <a class="navbar-brand" href="~/Admin/">myHotel Dashboard</a>
+        <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+        <!-- Navbar Search-->
+        <!-- Navbar-->
+        <ul class="navbar-nav ml-auto ml-md-0">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                    @Html.ActionLink("Settings", "Index", "Manage", null, new { @class = "dropdown-item" })
+                    @Html.ActionLink("Messages", "Messages", "Admin", null, new { @class = "dropdown-item" })
+                    <div class="dropdown-divider"></div>
+
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "dropdown-item" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+
+                    }
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+
+                        <div class="sb-sidenav-menu-heading">myHotel Admin</div>
+                        @Html.ActionLink("Dashboard", "Index", "Admin", null, new { @class = "nav-link" })
+                        @Html.ActionLink("Manage Rooms", "Index", "Room", null, new { @class = "nav-link" })
+                        @Html.ActionLink("Reservations", "Index", "Reservations", null, new { @class = "nav-link" })
+                        @Html.ActionLink("Customers", "Index", "Customer", null, new { @class = "nav-link" })
+
+
+                        <div class="sb-sidenav-menu-heading">Manage Website Content</div>
+                        @Html.ActionLink("Photos", "Photos", "Admin", null, new { @class = "nav-link" })
+                        @Html.ActionLink("Hotel Info", "Info", "Admin", null, new { @class = "nav-link" })
+                        @Html.ActionLink("Features", "Features", "Admin", null, new { @class = "nav-link" })
+
+                        <div class="sb-sidenav-menu-heading">Website Navigation</div>
+                        @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+                        @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })
+                        @Html.ActionLink("Features", "Features", "Home", null, new { @class = "nav-link" })
+                        @Html.ActionLink("Gallery", "Gallery", "Home", null, new { @class = "nav-link" })
+                        @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })
+
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    @User.Identity.GetUserName()
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid">
+
+                    <div class="container">
+                        @RenderBody()
+                    </div>
+                </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; myHotel @DateTime.Now</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/trumbowyg.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/plugins/colors/trumbowyg.colors.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/plugins/fontsize/trumbowyg.fontsize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="~/Scripts/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="~/Scripts/chart-area-demo.js"></script>
+    <script src="~/Scripts/chart-bar-demo.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script src="~/Scripts/datatables-demo.js"></script>
+
+
+
+    <script>
+        $.expr[":"].contains = $.expr.createPseudo(function (arg) {
+            return function (elem) {
+                return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+            };
+        });
+        $(document).ready(function () {
+
+            $('#search').on('keyup', function () {
+                var filterWord = $(this).val().toLowerCase();
+                $('#lbox').find('option').show();
+                $('#lbox').find('option').not(':contains(' + filterWord + ')').hide();
+            });
+        });
+
+        $(document).ready(function () {
+
+            $(".togglebtn").click(function () {
+                $(this).next().toggle("slow");
+            });
+            $(".toggle").toggle();
+
+
+            $(".deleteconfirm").hide();
+            $(".delete").click(function () {
+                $(".deleteconfirm").hide();
+                $(".delete").show();
+                $(this).hide();
+                $(this).next().show();
+            });
+            $('#myEditor').trumbowyg({
+                btns: [
+                    ['viewHTML'],
+                    ['undo', 'redo'], // Only supported in Blink browsers
+                    ['formatting'],
+                    ['foreColor'],
+                    ['fontsize'],
+                    ['strong', 'em', 'del'],
+                    ['superscript', 'subscript'],
+                    ['link'],
+                    ['insertImage'],
+                    ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                    ['unorderedList', 'orderedList'],
+                    ['horizontalRule'],
+                    ['removeformat'],
+                    ['fullscreen']
+                ]
+            });
+
+
+
+
+        });
+
+    </script>
+
+</body>
+</html>

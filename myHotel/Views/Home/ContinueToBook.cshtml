@@ -1,0 +1,56 @@
+﻿@model myHotel.Models.Reservation
+
+@{
+    ViewBag.Title = "Continue To Book";
+}
+    <section class="page-section">
+        
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+        <div class="transparent">
+            <h2>Add extras</h2>
+            <label>Full Name:</label> @ViewBag.customer.customerName<br />
+            <label>Address:</label>@ViewBag.customer.AddressLine1 <br />@ViewBag.customer.City <br />@ViewBag.customer.Postcode<br />
+            <label>Phone:</label> @ViewBag.customer.Telephone<br />
+            <label>Email:</label> @ViewBag.customer.Email<br />
+            <label>Room Type:</label> @ViewBag.room.roomType<br />
+            <label>Dates:</label> @ViewBag.booking.indate.ToShortDateString() - @ViewBag.booking.outdate.ToShortDateString()<br />
+            <label>Guests:</label> @ViewBag.booking.adults Adult(s) and @ViewBag.booking.children child(ren)
+            <div class="form-horizontal">
+
+
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col-md-4 col-sm-5 col-lg-3">
+                        Add Breakfast
+                        <div class="checkbox">
+                            <select class="form-control" name="breakfast"><option value="true">Yes +£5.99</option><option value="false">No +£0.00</option></select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-4 col-sm-5 col-lg-3">
+                        Add Shuttle
+                        <div class="checkbox">
+                            <select class="form-control" name="shuttle"><option value="true">Yes +£22.99</option><option value="false">No +£0.00</option></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Confirm" class="btn btn-default" />
+
+                </div>
+            </div>
+        </div>
+            }
+
+ 
+    </section>

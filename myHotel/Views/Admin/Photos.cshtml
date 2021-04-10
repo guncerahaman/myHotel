@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewBag.Title = "Photos";
+}
+@using (Html.BeginForm("Photos", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <h2>Add Photos to Gallery</h2>
+    <div class="form-group">
+        <div class="col-md-4 col-sm-5 col-lg-3">
+            <label class="form-label">Image Category</label>
+            <select class="form-control" name="folder"><option value="double_">Double Rooms</option><option value="twin">Twin Rooms</option><option value="family">Family Suites</option><option value="triple">Triple Rooms</option><option value="generic">Other Photos</option></select>
+            <label class="form-label">Please upload an Image</label>
+            <input class="form-control-file" type="file" name="ImageFile" /><br />
+            <input class="btn btn-primary" type="submit" value="Add photo" />
+        </div>
+    </div>
+}
+
+<div class="clearfix"></div>
+<br />
+<h3>Manage Uploaded Photos</h3>
+<div class="form-horizontal">
+    <div class="row">
+        @if (ViewBag.generic != null)
+
+        {
+
+            <label>Other Photos</label><br />
+            foreach (var image in (IEnumerable<string>)ViewBag.generic)
+            {
+                using (Html.BeginForm("DeletePhoto", "Admin", FormMethod.Post))
+                {
+                    <div class="col-4"><img src="@Url.Content(image)" alt="Other" width="100" />
+                    <input name="image" type="text" value="@image" style="display:none" /><br />
+         <input class="delete fas fa-lg fa-trash-alt" type="button" value="Delete photo" />
+        <input class="deleteconfirm btn btn-outline-danger" type="submit" value="Delete photo" />
+  </div>              }
+            }
+
+        }
+    </div>
+    <div class="row">
+        @if (ViewBag.family != null)
+        {<label>Family Suites</label><br />
+            foreach (var image in (IEnumerable<string>)ViewBag.family)
+            {
+                using (Html.BeginForm("DeletePhoto", "Admin", FormMethod.Post))
+                {
+    <div class="col-4">
+        <img src="@Url.Content(image)" alt="Other" width="100" />
+        <input name="image" type="text" value="@image" style="display:none" />
+        <input class="delete fas fa-lg fa-trash-alt" type="button" value="Delete photo" />
+        <input class="deleteconfirm btn btn-outline-danger" type="submit" value="Delete photo" />
+    </div>        }
+            }
+        }
+    </div>
+    <div class="row">
+        @if (ViewBag.triple != null)
+        {<label>Triple Rooms</label>
+            foreach (var image in (IEnumerable<string>)ViewBag.triple)
+            {
+                using (Html.BeginForm("DeletePhoto", "Admin", FormMethod.Post))
+                {
+    <div class="col-4">
+        <img src="@Url.Content(image)" alt="Other" width="100" />
+        <input name="image" type="text" value="@image" style="display:none" /><br />
+        <input class="delete fas fa-lg fa-trash-alt" type="button" value="Delete photo" />
+        <input class="deleteconfirm btn btn-outline-danger" type="submit" value="Delete photo" />
+    </div>     }
+            }
+        }
+    </div>
+    <div class="row">
+        @if (ViewBag.double_ != null)
+        {
+        <label> Double Rooms</label>
+            foreach (var image in (IEnumerable<string>)ViewBag.double_)
+            {
+                using (Html.BeginForm("DeletePhoto", "Admin", FormMethod.Post))
+                {
+    <div class="col-4">
+        <img src="@Url.Content(image)" alt="Other" width="100" />
+        <input name="image" type="text" value="@image" style="display:none" /><br />
+        <input class="delete fas fa-lg fa-trash-alt" type="button" value="Delete photo" />
+        <input class="deleteconfirm btn btn-outline-danger" type="submit" value="Delete photo" />
+    </div>      }
+            }
+        }
+    </div>
+    <div class="row">
+
+        @if (ViewBag.twin != null)
+        {<label>Twin Rooms</label>
+            foreach (var image in (IEnumerable<string>)ViewBag.twin)
+            {
+                using (Html.BeginForm("DeletePhoto", "Admin", FormMethod.Post))
+                {
+    <div class="col-4">
+        <img src="@Url.Content(image)" alt="Other" width="100" />
+        <input name="image" type="text" value="@image" style="display:none" /><br />
+        <input class="delete fas fa-lg fa-trash-alt" type="button" value="Delete photo" />
+        <input class="deleteconfirm btn btn-outline-danger" type="submit" value="Delete photo" />
+    </div>   }
+            }
+        }
+    </div>
+</div>

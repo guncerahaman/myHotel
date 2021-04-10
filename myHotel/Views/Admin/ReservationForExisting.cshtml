@@ -1,0 +1,148 @@
+﻿@model myHotel.Models.Reservation
+
+@{
+    ViewBag.Title = "Reservation";
+}
+
+<h2>New Reservation</h2>
+<p>
+    @Html.ActionLink("New Reservation", "NewReservation", "Admin", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Current Reservations", "Index", "Reservations", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Past Reservations", "PastReservations", "Reservations", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Cancellations", "Cancellations", "Admin", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Cancellation Requests", "CancelRequests", "Admin", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Incomplete Reservations", "Incomplete", "Reservations", null, new { @class = "btn btn-default" })
+
+</p>
+<h4>Reservation</h4>
+<hr /><div class="form-horizontal">
+    @if (ViewBag.customername != null)
+
+    {
+        <div class="form-group">
+
+            <div class="col-md-10">
+                <label> Add Reservation for :</label>
+
+                <label class="form-label">@ViewBag.customername </label>
+
+            </div>
+        </div>
+    }
+    <div class="form-group">    <div class="col-md-10">Search for available rooms</div></div>
+    @using (Html.BeginForm("SearchRooms", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+
+            <div class="col-md-10">
+                Check in Date
+                @Html.EditorFor(model => model.checkin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.checkin, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <div class="col-md-10">
+                Check out Date
+                @Html.EditorFor(model => model.checkout, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.checkout, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Search for Rooms" class="btn btn-primary" />
+            </div>
+        </div>
+
+    }
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <input style="display:none" type="text" name="customerID" value="@ViewBag.customerID" />
+
+
+        if (ViewBag.roomNumber != null)
+        {
+            <div class="form-group">
+
+                <div class="col-md-10">
+
+                    Room:
+                    @Html.DropDownList("roomNumber", null, htmlAttributes: new { @id = "rno", @class = "form-control" })
+                    <label id="type"></label>
+                    <script>
+                        var e, strUser;
+                        e = document.getElementById("rno");
+                        e.addEventListener("click", function () {
+                            strUser = e.value;
+                            document.getElementById("type").innerHTML = "The selected room number is " + strUser;
+                        })
+                    </script>
+
+                    @Html.ValidationMessageFor(model => model.roomNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            <label>Please Select dates to display available rooms.</label>
+        }
+        <div class="form-group">
+
+            <div class="col-md-10">
+                Number of Adults:
+                @Html.EditorFor(model => model.adult, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.adult, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <div class="col-md-10">
+                Number of Children:
+                @Html.EditorFor(model => model.children, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.children, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+
+        <div class="form-group">
+            <div class="col-md-4 col-sm-5 col-lg-3">
+                Add Breakfast
+                <div class="checkbox">
+                    <select class="form-control" name="breakfast"><option value="true">Yes +£5.99</option><option value="false">No +£0.00</option></select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-4 col-sm-5 col-lg-3">
+                Add Shuttle
+                <div class="checkbox">
+                    <select class="form-control" name="shuttle"><option value="true">Yes +£22.99</option><option value="false">No +£0.00</option></select>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+
+    }
+</div>
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>

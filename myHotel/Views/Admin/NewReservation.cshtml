@@ -1,0 +1,83 @@
+﻿@model myHotel.Models.Customer
+@{
+    ViewBag.Title = "NewReservation";
+}
+
+<h1>New Reservation</h1>
+
+    <p>
+        @Html.ActionLink("New Reservation", "NewReservation", "Admin", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Past Reservations", "PastReservations", "Reservations", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Cancellations", "Cancellations", "Admin", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Cancellation Requests", "CancelRequests", "Admin", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Incomplete Reservations", "Incomplete", "Reservations", null, new { @class = "btn btn-default" })
+    </p>
+<h3>Is this resarvation for existing customer?</h3>
+@Html.ActionLink("Find Customer","Index", "Customer",null, new { @class = "btn btn-default" })
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <h4>Add New Customer Information</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+
+        <div class="col-md-10">
+            Full Name:
+            @Html.EditorFor(model => model.customerName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.customerName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            Address:
+            @Html.EditorFor(model => model.AddressLine1, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.AddressLine1, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            City : @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+      
+        <div class="col-md-10">
+            Postcode:
+            @Html.EditorFor(model => model.Postcode, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Postcode, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        
+        <div class="col-md-10">
+            Telephone:
+            @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+       
+        <div class="col-md-10">
+            Email:
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="">
+            <input type="submit" value="Continue for new customer" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+
+}

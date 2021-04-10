@@ -1,0 +1,49 @@
+﻿@model IEnumerable<myHotel.Models.Room>
+
+@{
+    ViewBag.Title = "Rooms";
+}
+
+<h2>Manage Rooms</h2>
+
+<p>
+    @Html.ActionLink("Add New Room", "Create",null, new { @class = "btn btn-default" })
+</p>
+<div>
+    
+        <table class="table table-bordered" id="dataTable" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Room Number</th>
+                
+                    <th>
+                        Room Type
+                    </th>
+                    <th>
+                        Base Price
+                    </th>
+                    <th>Account</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td> @Html.DisplayFor(modelItem => item.roomNumber)</td>
+                       
+                        <td>
+                            @Html.DisplayFor(modelItem => item.roomType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.price)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.roomNumber }, new { @class = "btn btn-default" }) 
+                            @Html.ActionLink("Details", "Details", new { id = item.roomNumber }, new { @class = "btn btn-default" }) 
+                                </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+   
+</div>

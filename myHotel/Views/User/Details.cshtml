@@ -1,0 +1,122 @@
+﻿@model myHotel.Models.Payment
+
+@{
+    ViewBag.Title = "Details";
+}
+    <section class="page-section">
+
+        <h2>Reservation Details</h2>
+
+        <div>
+   
+            <hr />
+            <dl class="dl-horizontal transparent">
+                <dt>
+                    Name:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Customer.customerName)
+                </dd>
+                <dt>
+                    Room Type:
+                </dt>
+
+                <dd>
+                    @Model.Reservation.Room.roomType
+                </dd>
+
+                <dt>
+                    Payment Type:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.paymentType)
+                </dd>
+
+                <dt>
+                    Payment Date:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.paymentDate)
+                </dd>
+
+                <dt>
+                    Total Paid:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.totalPaid)
+                </dd>
+
+                <dt>
+                    Status:
+                </dt>
+
+                <dd>
+
+                    @if (Model.Reservation.checkout < DateTime.Now)
+                    {
+                        <label id="status">
+                            Passive
+                        </label>
+                    }
+                    else
+                    {
+                        <label id="status">
+                          @Model.Reservation.status
+                        </label>
+                    }
+
+
+                </dd>
+
+                <dt>
+                   Extras:
+                </dt>
+
+                <dd>
+                    @if (Model.Reservation.shuttle == true)
+                    {
+                        <label>Shuttle</label> <br />
+
+                    }
+                    else if (Model.Reservation.breakfast == true)
+                    {
+                        <label>Breakfast</label>
+
+                    }
+                    else { 
+                    <label>No Extras.</label>
+                    
+                    }
+       
+                </dd>
+            </dl>
+        </div>
+        <p>
+            <label id="msg"></label><br />
+            @Html.ActionLink("Cancel Reservation", "Cancel", new { reservationID = Model.ReservationID },new{ @id ="cancelbtn",@class = "btn btn-default"})
+        </p>
+        
+        <script>
+            if (document.getElementById("status").innerText != "" && document.getElementById("status").innerText != "Passive") {
+
+                document.getElementById("cancelbtn").addEventListener("click", function (event) {
+                    event.preventDefault();
+                    document.getElementById("msg").innerHTML = "There has already been a cancellation request.";
+                });
+            }
+          else if (document.getElementById("status").innerText == "Passive") {
+                document.getElementById("cancelbtn").addEventListener("click", function (event) {
+                    event.preventDefault();
+                    document.getElementById("msg").innerHTML = "You cannot cancel a past booking.";
+                });
+
+    }
+        </script>
+
+  
+        </section>
+

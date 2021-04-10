@@ -1,0 +1,113 @@
+﻿@model myHotel.Models.Reservation
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+<p>
+    @Html.ActionLink("New Reservation", "NewReservation", "Admin", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Current Reservations", "Index", "Reservations", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Past Reservations", "PastReservations", "Reservations", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Cancellations", "Cancellations", "Admin", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Cancellation Requests", "CancelRequests", "Admin", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Incomplete Reservations", "Incomplete", "Reservations", null, new { @class = "btn btn-default" })
+
+</p>
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Reservation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.adult)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.adult)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.children)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.children)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.checkin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.checkin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.checkout)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.checkout)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.resDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.resDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.breakfast)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.breakfast)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.shuttle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.shuttle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.customerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.customerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Room.roomType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Room.roomType)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

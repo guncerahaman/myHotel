@@ -1,0 +1,161 @@
+﻿@model myHotel.Models.Customer
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Book";
+}
+    <section class="page-section">
+        <div class="transparent">
+            <h2>Main Guest Information</h2>
+
+            @if (!Request.IsAuthenticated)
+            {<p>Are you a returning customer?</p>
+                <p>Registered customers can change or cancel their bookings.</p>
+                <div>
+                    @Html.ActionLink("Log in to continue", "CustomerLogin", "Home", null, new { @class = "page-scroll" }) <br />
+                    @Html.ActionLink("Register", "Register", "Account", null, new { @class = "page-scroll" })
+                </div>
+                <hr />
+                <p>Or Complete booking as guest</p>
+                <div>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+
+                            <hr />
+                            @Html.ValidationSummary(true, "Please fill all required fields marked with *", new { @class = "text-danger" })
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    Full Name
+                                    @Html.EditorFor(model => model.customerName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.customerName, "*", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    Address
+                                    @Html.EditorFor(model => model.AddressLine1, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.AddressLine1, "*", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    City
+                                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.City, "*", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    Postcode
+                                    @Html.EditorFor(model => model.Postcode, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Postcode, "*", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    Phone Number
+                                    @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    E-mail
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "*", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Continue" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+
+            }
+
+            else if (Request.IsAuthenticated && ViewBag.preuser == true)
+            {
+
+                @Html.ActionLink("Complete booking", "ContinueToBook", new { CustomerID = ViewBag.customer.customerID }, new { @class = "btn btn-default" }) <label>for @User.Identity.GetUserName()</label>
+
+            }
+
+            else
+            {
+
+                <p>Complete booking for @User.Identity.GetUserName()</p>
+                Html.BeginForm();
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                Full Name
+                                @Html.EditorFor(model => model.customerName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.customerName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                Address
+                                @Html.EditorFor(model => model.AddressLine1, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.AddressLine1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                City
+                                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                Postcode
+                                @Html.EditorFor(model => model.Postcode, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Postcode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                Phone Number
+                                @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <input name="Email" value="@User.Identity.GetUserName()" style="display:none" />
+                        <input name="UserID" value="@User.Identity.GetUserId()" style="display:none" />
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Continue" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+
+        </div>
+
+    </section>

@@ -1,0 +1,121 @@
+﻿@model myHotel.Models.Reservation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<p>
+    @Html.ActionLink("New Reservation", "NewReservation", "Admin", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Current Reservations", "Index", "Reservations", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Past Reservations", "PastReservations", "Reservations", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Cancellations", "Cancellations", "Admin", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Cancellation Requests", "CancelRequests", "Admin", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Incomplete Reservations", "Incomplete", "Reservations", null, new { @class = "btn btn-default" })
+
+</p>
+<div>
+    <h4>Reservation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Adults
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.adult)
+        </dd>
+
+        <dt>
+            Children
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.children)
+        </dd>
+
+        <dt>
+            Check in
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.checkin)
+        </dd>
+
+        <dt>
+            Check out
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.checkout)
+        </dd>
+
+        <dt>
+            Reservation Date
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.resDate)
+        </dd>
+
+        <dt>
+            Extras:
+        </dt>
+
+        <dd>
+            @if (Model.shuttle == true)
+            {
+                <label>Shuttle</label> <br />
+
+            }
+            else if (Model.breakfast == true)
+            {
+                <label>Breakfast</label>
+
+            }
+            else
+            {
+                <label>No Extras.</label>
+
+            }
+
+        </dd>
+
+        <dt>
+            Status
+        </dt>
+
+
+        @if (Model.status == null)
+        {
+            <dd>No Action</dd>
+        }
+        else
+        {
+            <dd>Model.status</dd>
+        }
+
+
+        <dt>
+            Customer
+        </dt>
+
+        <dd>
+            @Html.ActionLink(Model.Customer.customerName, "Details", "Customer", new { id = Model.customerID }, null)
+        </dd>
+
+        <dt>
+            Room
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Room.roomType)
+            @Html.DisplayFor(model => model.Room.roomNumber)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ReservationID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
