@@ -7,3 +7,152 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+
+public partial class AspNetRoles
+{
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public AspNetRoles()
+    {
+        this.AspNetUsers = new HashSet<AspNetUsers>();
+    }
+
+    public string Id { get; set; }
+    public string Name { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
+}
+
+public partial class AspNetUsers
+{
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public AspNetUsers()
+    {
+        this.Customer = new HashSet<Customer>();
+        this.AspNetRoles = new HashSet<AspNetRoles>();
+    }
+
+    public string Id { get; set; }
+    public string Email { get; set; }
+    public bool EmailConfirmed { get; set; }
+    public string PasswordHash { get; set; }
+    public string SecurityStamp { get; set; }
+    public string PhoneNumber { get; set; }
+    public bool PhoneNumberConfirmed { get; set; }
+    public bool TwoFactorEnabled { get; set; }
+    public Nullable<System.DateTime> LockoutEndDateUtc { get; set; }
+    public bool LockoutEnabled { get; set; }
+    public int AccessFailedCount { get; set; }
+    public string UserName { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<Customer> Customer { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
+}
+
+public partial class Cancellation
+{
+    public int cID { get; set; }
+    public Nullable<int> reservationID { get; set; }
+    public Nullable<bool> refunded { get; set; }
+    public string reason { get; set; }
+
+    public virtual Reservation Reservation { get; set; }
+}
+
+public partial class Customer
+{
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public Customer()
+    {
+        this.Payment = new HashSet<Payment>();
+        this.Reservation = new HashSet<Reservation>();
+    }
+
+    public int customerID { get; set; }
+    public string customerName { get; set; }
+    public string AddressLine1 { get; set; }
+    public string City { get; set; }
+    public string Postcode { get; set; }
+    public string Telephone { get; set; }
+    public string Email { get; set; }
+    public string UserID { get; set; }
+
+    public virtual AspNetUsers AspNetUsers { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<Payment> Payment { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<Reservation> Reservation { get; set; }
+}
+
+public partial class messages
+{
+    public int Id { get; set; }
+    public string name { get; set; }
+    public string email { get; set; }
+    public string phone { get; set; }
+    public string message { get; set; }
+}
+
+public partial class Payment
+{
+    public int PaymentID { get; set; }
+    public int ReservationID { get; set; }
+    public string paymentType { get; set; }
+    public Nullable<System.DateTime> paymentDate { get; set; }
+    public Nullable<int> customerID { get; set; }
+    public Nullable<double> totalPaid { get; set; }
+
+    public virtual Customer Customer { get; set; }
+    public virtual Reservation Reservation { get; set; }
+}
+
+public partial class Reservation
+{
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public Reservation()
+    {
+        this.Cancellation = new HashSet<Cancellation>();
+        this.Payment = new HashSet<Payment>();
+    }
+
+    public int ReservationID { get; set; }
+    public Nullable<int> customerID { get; set; }
+    public int roomNumber { get; set; }
+    public int adult { get; set; }
+    public Nullable<int> children { get; set; }
+    public System.DateTime checkin { get; set; }
+    public Nullable<System.DateTime> checkout { get; set; }
+    public Nullable<System.DateTime> resDate { get; set; }
+    public Nullable<bool> breakfast { get; set; }
+    public Nullable<bool> shuttle { get; set; }
+    public string status { get; set; }
+    public string message { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<Cancellation> Cancellation { get; set; }
+    public virtual Customer Customer { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<Payment> Payment { get; set; }
+    public virtual Room Room { get; set; }
+}
+
+public partial class Room
+{
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public Room()
+    {
+        this.Reservation = new HashSet<Reservation>();
+    }
+
+    public int roomNumber { get; set; }
+    public Nullable<bool> status { get; set; }
+    public string roomType { get; set; }
+    public Nullable<double> price { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<Reservation> Reservation { get; set; }
+}

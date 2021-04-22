@@ -7,31 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace myHotel.Models
+using System;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+
+public partial class Entities1 : DbContext
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Infrastructure;
-    
-    public partial class Entities1 : DbContext
+    public Entities1()
+        : base("name=Entities1")
     {
-        public Entities1()
-            : base("name=Entities1")
-        {
-        }
-    
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            throw new UnintentionalCodeFirstException();
-        }
-    
-        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<Cancellation> Cancellation { get; set; }
-        public virtual DbSet<Customer> Customer { get; set; }
-        public virtual DbSet<messages> messages { get; set; }
-        public virtual DbSet<Payment> Payment { get; set; }
-        public virtual DbSet<Reservation> Reservation { get; set; }
-        public virtual DbSet<Room> Room { get; set; }
     }
+
+    protected override void OnModelCreating(DbModelBuilder modelBuilder)
+    {
+        throw new UnintentionalCodeFirstException();
+    }
+
+    public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+    public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+    public virtual DbSet<Cancellation> Cancellation { get; set; }
+    public virtual DbSet<Customer> Customer { get; set; }
+    public virtual DbSet<messages> messages { get; set; }
+    public virtual DbSet<Payment> Payment { get; set; }
+    public virtual DbSet<Reservation> Reservation { get; set; }
+    public virtual DbSet<Room> Room { get; set; }
 }
